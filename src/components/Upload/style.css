@@ -1,0 +1,17 @@
+.img-box {
+  overflow: hidden;
+}
+.img-box img {
+  width: 100%;
+  height: auto;
+}
+.cropper-img {
+  width: 60px;
+  height: 60px;
+  overflow: hidden;
+  border: solid 1px #ededed;
+}
+.cropper-img img {
+  width: 100%;
+  height: auto;
+}

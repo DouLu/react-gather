@@ -1,5 +1,6 @@
 import Home from './pages/home';
 import DragDemo from './pages/dnd';
+import Upload from './components/Upload';
 
 export const routerConfig = [
   {
@@ -16,8 +17,8 @@ export const routerConfig = [
   },
   {
     path: '/testtt',
-    title: 'testttHome',
-    content: DragDemo,
+    title: 'upload',
+    content: Upload,
     iconType: 'upload'
   },
 ];
