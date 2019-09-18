@@ -22,6 +22,9 @@ export default class DragDemo extends Component {
       weatherinfo: null,
       pid: null,
       cid: null,
+      province: '',
+      city: '',
+      county: '',
     };
   }
   componentDidMount() {
@@ -39,7 +42,7 @@ export default class DragDemo extends Component {
       .catch(e => console.log(e));
   }
   render() {
-    const { weatherinfo, data, pid, cid } = this.state;
+    const { weatherinfo, data, pid, cid, province, city, county } = this.state;
     return (
       <div>
         {weatherinfo && <div>
@@ -74,15 +77,15 @@ export default class DragDemo extends Component {
         <div>
           <span>
             省：
-            <TreeSelect onChange={(value) => { this.setState({ pid: value }) }} style={{ width: 160 }} placeholder={'选择省：'} treeData={PROVINCE} />
+            <TreeSelect onChange={(value, label) => { this.setState({ pid: value, province: label, city: '', county: '' }) }} style={{ width: 160 }} placeholder={'选择省：'} value={province} treeData={PROVINCE} />
           </span>
           <span>
             市：
-            <TreeSelect onChange={(value) => { this.setState({ cid: value }) }} style={{ width: 160 }} placeholder={'选择市：'} treeData={pid && CITY(pid)} />
+            <TreeSelect onChange={(value, label) => { this.setState({ cid: value, city: label, county: '' }) }} style={{ width: 160 }} placeholder={'选择市：'} value={city} treeData={pid && CITY(pid)} />
           </span>
           <span>
             地区：
-            <TreeSelect style={{ width: 160 }} placeholder={'选择地区：'} treeData={cid && COUNTY(cid)} />
+            <TreeSelect onChange={(value, label) => { this.setState({ county: label }) }} style={{ width: 160 }} placeholder={'选择地区：'} value={county} treeData={cid && COUNTY(cid)} />
           </span>
         </div>
       </div>
