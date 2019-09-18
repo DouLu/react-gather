@@ -2,10 +2,12 @@
   "name": "react-gather",
   "version": "0.1.0",
   "private": false,
+  "proxy": "http://www.weather.com.cn/",
   "dependencies": {
     "antd": "^3.22.2",
     "cropperjs": "^1.5.5",
     "eslint-plugin-html": "^6.0.0",
+    "lodash": "^4.17.15",
     "prop-types": "^15.7.2",
     "react": "^16.9.0",
     "react-copy-to-clipboard": "^5.0.1",
