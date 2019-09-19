@@ -45,7 +45,7 @@ export default class AppLayout extends React.Component {
             <div className="logo" />
             {this.renderMenu(routerConfig)}
           </Sider>
-          <Layout>
+          <div style={{ flex: 'auto', overflow: 'scroll' }}>
             <Header style={{ background: '#fff', padding: 0 }}>
               <Icon
                 className="trigger"
@@ -63,7 +63,7 @@ export default class AppLayout extends React.Component {
             >
               {this.renderContent(routerConfig)}
             </Content>
-          </Layout>
+          </div>
         </Layout>
       </Router>
     );

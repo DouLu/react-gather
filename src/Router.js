@@ -10,13 +10,13 @@ export const routerConfig = [
     iconType: 'user'
   },
   {
-    path: '/test',
-    title: 'test',
+    path: '/weather',
+    title: 'weather',
     content: DragDemo,
     iconType: 'upload'
   },
   {
-    path: '/testtt',
+    path: '/upload',
     title: 'upload',
     content: Upload,
     iconType: 'upload'

@@ -3,7 +3,14 @@ import propTypes from 'prop-types';
 import _ from 'lodash';
 import './style.css';
 import { message, TreeSelect } from 'antd';
-import { ThreeLevelProvinceData, PROVINCE, CITY, COUNTY } from '../../utils'
+import { ThreeLevelProvinceData, PROVINCE, CITY, COUNTY } from '../../utils';
+import AceEditor from 'react-ace';
+import 'brace/mode/json'; // 语言包
+import 'brace/theme/monokai'; // 主题包
+import 'brace/ext/searchbox'; //搜索替换快捷键
+// http://securingsincity.github.io/react-ace/
+
+
 console.log(_.flatMapDeep([1, [2, 3], [4, [5]], 6, [7, 8]]));
 
 export default class DragDemo extends Component {
@@ -28,7 +35,7 @@ export default class DragDemo extends Component {
     };
   }
   componentDidMount() {
-    const cityCode = '101210103';
+    const cityCode = '101190101';
     const apiUrl = `${window.location.origin}/data/cityinfo/${cityCode}.html`;
     fetch(apiUrl)
       .then(res => res.json())
@@ -41,8 +48,17 @@ export default class DragDemo extends Component {
       .then((data) => { this.setState({ data }) })
       .catch(e => console.log(e));
   }
+
+  getWeather(city) {
+    const api = `https://www.apiopen.top/weatherApi?city=${city}`;
+    fetch(api)
+      .then(res => res.json())
+      .then(data => { this.setState({ code: data.data }); })
+      .catch(error => { message.error(error) });
+  }
+
   render() {
-    const { weatherinfo, data, pid, cid, province, city, county } = this.state;
+    const { weatherinfo, pid, cid, province, city, county, code } = this.state;
     return (
       <div>
         {weatherinfo && <div>
@@ -58,12 +74,12 @@ export default class DragDemo extends Component {
         </div>}
         <div>
           fetch data:
-         <TreeSelect
+         {/* <TreeSelect
             showSearch
             style={{ width: 160 }}
             placeholder={'选择城市'}
             treeData={data}
-          />
+          /> */}
         </div>
         <div>
           json data:
@@ -77,16 +93,25 @@ export default class DragDemo extends Component {
         <div>
           <span>
             省：
-            <TreeSelect onChange={(value, label) => { this.setState({ pid: value, province: label, city: '', county: '' }) }} style={{ width: 160 }} placeholder={'选择省：'} value={province} treeData={PROVINCE} />
+            <TreeSelect onChange={(value, label) => { this.setState({ pid: value, province: label, city: '', county: '' }); this.getWeather(label); }} style={{ width: 160 }} placeholder={'选择省：'} value={province} treeData={PROVINCE} />
           </span>
           <span>
             市：
-            <TreeSelect onChange={(value, label) => { this.setState({ cid: value, city: label, county: '' }) }} style={{ width: 160 }} placeholder={'选择市：'} value={city} treeData={pid && CITY(pid)} />
+            <TreeSelect onChange={(value, label) => { this.setState({ cid: value, city: label, county: '' }); this.getWeather(label); }} style={{ width: 160 }} placeholder={'选择市：'} value={city} treeData={pid && CITY(pid)} />
           </span>
           <span>
             地区：
-            <TreeSelect onChange={(value, label) => { this.setState({ county: label }) }} style={{ width: 160 }} placeholder={'选择地区：'} value={county} treeData={cid && COUNTY(cid)} />
+            <TreeSelect onChange={(value, label) => { this.setState({ county: label }); this.getWeather(label); }} style={{ width: 160 }} placeholder={'选择地区：'} value={county} treeData={cid && COUNTY(cid)} />
           </span>
+        </div>
+        <div>
+          所选城市天气：
+          <AceEditor
+            mode="json"
+            theme="monokai"
+            name="UNIQUE_ID_OF_DIV"
+            value={JSON.stringify(code, null, '\t')}
+          />
         </div>
       </div>
     );
