@@ -1,6 +1,7 @@
 import Home from './pages/home';
 import DragDemo from './pages/dnd';
 import Upload from './components/Upload';
+import KnowPlant from './pages/plant';
 
 export const routerConfig = [
   {
@@ -19,6 +20,12 @@ export const routerConfig = [
     path: '/upload',
     title: 'upload',
     content: Upload,
+    iconType: 'upload'
+  },
+  {
+    path: '/plant',
+    title: 'plant',
+    content: KnowPlant,
     iconType: 'upload'
   },
 ];

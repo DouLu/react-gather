@@ -50,6 +50,7 @@ class Upload extends Component {
       visible: false,
       cropperImg: cropperImg,
     });
+    this.props.onUpload && this.props.onUpload(cropperImg);
   };
 
   handleCancel = () => {
@@ -97,6 +98,7 @@ Upload.propTypes = {
   height: propTypes.number,
   accept: propTypes.string,
   text: propTypes.string,
+  onUpload: propTypes.func,
 };
 
 export default Upload;
