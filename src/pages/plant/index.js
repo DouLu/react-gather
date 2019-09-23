@@ -6,6 +6,41 @@ import 'brace/mode/json'; // 语言包
 import 'brace/theme/monokai'; // 主题包
 import 'brace/ext/searchbox'; //搜索替换快捷键
 
+import md5 from 'blueimp-md5';
+
+function getReqSign() {
+  // $params /* 关联数组 */, $appkey /* 字符串*/
+  const params = {
+    app_id: 2122130694,
+    time_stamp: Date.parse(new Date()),
+    nonce_str: '20e3408a79',
+    key1: '腾讯AI开放平台',
+    key2: '示例仅供参考',
+    sign: '',
+  };
+  const appkey = '3FpWut2aAfF9wO2e';
+  // 1. 字典升序排序
+  const newParams = {};
+  let sdic = Object.keys(params).sort();
+  sdic.forEach((item, index) => {
+    newParams[item] = params[sdic[index]]
+  });
+
+  // 2. 拼按URL键值对
+  let str = '';
+  for (const key in newParams) {
+    if (newParams[key] !== '') {
+      str += key + '=' + encodeURI(newParams) + '&';
+    }
+  }
+
+  // 3. 拼接app_key
+  str += 'app_key=' + appkey;
+
+  // 4. MD5运算+转换大写，得到请求签名
+  const sign = md5(str).toUpperCase();
+  return sign;
+}
 export default class KnowPlant extends Component {
   constructor(props) {
     super(props);
@@ -42,6 +77,33 @@ export default class KnowPlant extends Component {
           .catch(e => console.log(e))
       })
       .catch(e => console.log(e));
+
+
+    // 图片文字识别
+    const ocr_params = {
+      app_id: 2122130694,
+      time_stamp: Date.parse(new Date()),
+      nonce_str: '20e3408a79',
+      sign: getReqSign(),
+      image: imgData,
+    };
+    const ocrFormData = new FormData();
+    ocrFormData.append('app_id', ocr_params.app_id);
+    ocrFormData.append('time_stamp', ocr_params.time_stamp);
+    ocrFormData.append('nonce_str', ocr_params.nonce_str);
+    ocrFormData.append('sign', ocr_params.sign);
+    ocrFormData.append('image', params.image);
+    fetchPolyfill('https://api.ai.qq.com/fcgi-bin/ocr/ocr_generalocr', {
+      method: 'POST',
+      body: ocrFormData, // data can be `string` or {object}! 
+      headers: new Headers({
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Accept': 'application/json',
+      })
+    })
+      .then(res => res.json())
+      .then(data => { console.log('图片文字识别', data) })
+      .catch(e => console.log(e))
   }
 
   render() {
