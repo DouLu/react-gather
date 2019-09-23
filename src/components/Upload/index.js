@@ -42,6 +42,8 @@ class Upload extends Component {
       const imageURL = URL.createObjectURL(File);
       self.setState({ visible: true, sourceImg: imageURL });
     }
+    // 两次打开同一张图片时，第二次也可以触发onchange事件
+    this.inputRef.current.value = '';
   }
 
   handleOk = () => {
