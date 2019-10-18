@@ -1,0 +1,87 @@
+/* 五角星⭐️ */
+.star {
+  margin: 50px 0;
+  position: relative;
+  width: 0;
+  border-right: 100px solid transparent;
+  border-bottom: 70px solid yellowgreen;
+  border-left: 100px solid transparent;
+  transform: rotate(35deg) scale(0.6);
+}
+.star:before {
+  content: '';
+  position: absolute;
+  border-bottom: 80px solid yellowgreen;
+  border-left: 30px solid transparent;
+  border-right: 30px solid transparent;
+  top: -45px;
+  left: -65px;
+  transform: rotate(-35deg);
+}
+.star:after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: -105px;
+  border-right: 100px solid transparent;
+  border-bottom: 70px solid yellowgreen;
+  border-left: 100px solid transparent;
+  transform: rotate(-70deg);
+}
+
+/* 椭圆形 */
+.ellipse {
+  width: 120px;
+  height: 160px;
+  background-color: yellowgreen;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+}
+
+/* 文字编排 */
+* {
+  position: relative;
+}
+.box > h1,
+.box > h2 {
+  background: tomato;
+  font-size: 3rem;
+  line-height: 5rem;
+  color: #fff;
+  shape-outside: content-box;
+  shape-margin: 1rem;
+  margin: 30vh 2rem 0 -30vw;
+  shape-margin: 1rem;
+  float: left;
+  max-width: 60%;
+  border-radius: 1rem;
+}
+.box > h2 {
+  background: cadetblue;
+  float: right;
+  margin: 70vh -29vw 0 0;
+}
+.izq {
+  background: tomato;
+  float: left;
+  width: 30%;
+  height: 100vh;
+  clip-path: polygon(0% 0%, 90% 0%, 10% 100%, 0 100%);
+  shape-outside: polygon(0% 0%, 90% 0%, 10% 100%, 0 100%);
+  shape-margin: 1rem;
+}
+.dch {
+  background: cadetblue;
+  float: right;
+  width: 30%;
+  height: 100vh;
+  clip-path: polygon(90% 0%, 100% 0%, 100% 100%, 10% 100%);
+  shape-outside: polygon(90% 0%, 100% 0%, 100% 100%, 10% 100%);
+  shape-margin: 1rem;
+}
+.box > p {
+  padding: 20px;
+  font-size: 1.4rem;
+  line-height: 2;
+  font-weight: 300;
+  text-align: justify;
+}

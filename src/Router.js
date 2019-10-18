@@ -2,6 +2,7 @@ import Home from './pages/home';
 import DragDemo from './pages/dnd';
 import Upload from './components/Upload';
 import KnowPlant from './pages/plant';
+import CSS from './components/CSS';
 
 export const routerConfig = [
   {
@@ -27,5 +28,11 @@ export const routerConfig = [
     title: 'plant',
     content: KnowPlant,
     iconType: 'upload'
+  },
+  {
+    path: '/css',
+    title: 'css',
+    content: CSS,
+    iconType: 'user'
   },
 ];

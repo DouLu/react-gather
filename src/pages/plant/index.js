@@ -28,9 +28,10 @@ function getReqSign() {
 
   // 2. 拼按URL键值对
   let str = '';
+  // eslint-disable-next-line
   for (const key in newParams) {
     if (newParams[key] !== '') {
-      str += key + '=' + encodeURI(newParams) + '&';
+      str += key + '=' + encodeURI(newParams[key]) + '&';
     }
   }
 
