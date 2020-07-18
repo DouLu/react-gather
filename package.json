@@ -10,7 +10,7 @@
     "blueimp-md5": "^2.12.0",
     "cropperjs": "^1.5.5",
     "eslint-plugin-html": "^6.0.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "prop-types": "^15.7.2",
     "react": "^16.9.0",
     "react-ace": "^7.0.4",
